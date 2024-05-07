@@ -1,31 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Net.Http;
-using System.IO;
-using Path = System.IO.Path;
-
-using Firebase.Auth;
-using Firebase.Auth.Providers;
-using Firebase.Auth.Repository;
-using Firebase.Storage;
-
-using FireSharp.Interfaces;
-using FireSharp;
-using FireSharp.Config;
-using FireSharp.Response;
-using System.Security.RightsManagement;
-using System.Xml.Linq;
+﻿using System.Windows;
 
 namespace SRLS_launcher
 {
@@ -39,7 +12,7 @@ namespace SRLS_launcher
         }
         public void Enter_to_System()
         {
-            MainWindow mainWindow = new MainWindow();
+            WorkSpace mainWindow = new WorkSpace();
             mainWindow.Show();
             this.Close();
         }
@@ -55,7 +28,8 @@ namespace SRLS_launcher
         public void AppStarted()
         {
             Login_window.Visibility = Visibility.Hidden;
-            Create_window.Visibility= Visibility.Hidden;
+            Create_window.Visibility = Visibility.Hidden;
+            Create_DataInsert_window.Visibility = Visibility.Hidden;
         }
         private void Login_Page_Close(object sender, RoutedEventArgs e)
         {
@@ -65,7 +39,8 @@ namespace SRLS_launcher
         }
         private async void Login2_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (login_box.Text != "" && password_box.Password != "")
+            this.IsEnabled = false;
+            if (login_box.Text.Length > 0 && password_box.Password.Length > 0)
             {
                 bool isLoggedIn = await LauncherSys.Login(login_box.Text, password_box.Password);
                 if (isLoggedIn)
@@ -75,11 +50,13 @@ namespace SRLS_launcher
                 else
                 {
                     MessageBox.Show("Неверный логин или пароль!");
+                    this.IsEnabled = true;
                 }
             }
             else
             {
                 MessageBox.Show("Введите логин и пароль!");
+                this.IsEnabled = true;
             }
         }
         private void Create_Page_Close(object sender, RoutedEventArgs e)
@@ -93,125 +70,46 @@ namespace SRLS_launcher
             Login_window.Visibility = Visibility.Hidden;
             Create_window.Visibility = Visibility.Visible;
         }
-        private async void Create2_Button_Click(object sender, RoutedEventArgs e)
+        private void Create2_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (login_create_box.Text != "" && password_create_box.Password != "")
+            Create_window.Visibility= Visibility.Hidden;
+            Create_DataInsert_window.Visibility = Visibility.Visible;
+        }
+        private async void TryToCreate_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsEnabled = false;
+            if (login_create_box.Text.Length > 0 && password_create_box.Password.Length > 0)
             {
                 bool isRegisterIn = await LauncherSys.Create(login_create_box.Text, password_create_box.Password);
                 if (isRegisterIn)
                 {
-                    //var userInfo = new
-                    //{
-                    //    Name = name_.Text,
-                    //    Address = address_.Text,
-                    //    Age = age_.Text,
-                    //    PhoneNumber = number_.Text
-                    //};
-                    //await LauncherSys.GetFirebaseClient().SetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}", userInfo);
-                    //ShowWorkspace();
-                    MessageBox.Show("Успешная регистрация!");
+                    var userInfo = new
+                    {
+                        Login = login_create_box.Text,
+                        Name = username.Text,
+                        Password = password_create_box.Password,
+                        Date_Of_Birth = userdateofbirth.Text
+                    };
+                    await LauncherSys.GetFirebaseClient().SetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}", userInfo);
                     Enter_to_System();
+                    MessageBox.Show("Успешная регистрация!");
                 }
                 else
                 {
                     MessageBox.Show("Неверный логин или пароль!");
+                    Create_DataInsert_window.Visibility = Visibility.Hidden;
+                    Create_window.Visibility = Visibility.Visible;
+                    this.IsEnabled = true;
                 }
             }
             else
             {
                 MessageBox.Show("Неверное заполены поля!");
-            }
-        }
-    }
-    public class InitConfigsSys
-    {
-        static FirebaseAuthClient client;
-        static FireSharp.FirebaseClient firebaseClient;
-        static UserCredential userCredential;
-        static FirebaseStorage storage;
-        public InitConfigsSys()
-        {
-            InitConfigs();
-        }
-        public FireSharp.FirebaseClient GetFirebaseClient()
-        {
-            return firebaseClient;
-        }
-        public UserCredential GetUserCredential()
-        {
-            return userCredential;
-        }
-        public FirebaseStorage GetStorage()
-        {
-            return storage;
-        }
-        private void InitConfigs()
-        {
-            FirebaseAuthConfig config = new FirebaseAuthConfig
-            {
-                ApiKey = "AIzaSyCgXCL5GHSGmVJgDC1SDooeDubU3yCFz6I",
-                AuthDomain = "srls-launcher.firebaseapp.com",
-                Providers = new FirebaseAuthProvider[]
-                {
-                    new EmailProvider()
-                },
-                UserRepository = new FileUserRepository("test")
-            };
-            client = new FirebaseAuthClient(config);
-        }
-        private void InitConfigFirebase()
-        {
-            string _authSecret = null;
-
-            if (userCredential != null && userCredential.User != null && userCredential.User.Credential != null)
-            {
-                _authSecret = userCredential.User.Credential.IdToken;
-            }
-
-            IFirebaseConfig firebaseConfig = new FireSharp.Config.FirebaseConfig
-            {
-                RequestTimeout = TimeSpan.FromDays(1),
-                BasePath = "https://srls-launcher-default-rtdb.firebaseio.com",
-                AuthSecret = _authSecret
-            };
-            firebaseClient = new FirebaseClient(firebaseConfig);
-        }
-        private void InitConfigFirebaseStorage()
-        {
-            storage = new FirebaseStorage("screw-launcher.appspot.com", new FirebaseStorageOptions
-            {
-                AuthTokenAsyncFactory = () => Task.FromResult(userCredential.User.Credential.IdToken)
-            });
-        }
-        public async Task<bool> Login(string username, string password)
-        {
-            try
-            {
-                userCredential = await client.SignInWithEmailAndPasswordAsync(username, password);
-                InitConfigFirebaseStorage();
-                InitConfigFirebase();
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public async Task<bool> Create(string username, string password)
-        {
-            try
-            {
-                userCredential = await client.CreateUserWithEmailAndPasswordAsync(username, password);
-                InitConfigFirebaseStorage();
-                InitConfigFirebase();
-
-                return true;
-            }
-            catch
-            {
-                return false;
+                Create_DataInsert_window.Visibility = Visibility.Hidden;
+                Create_window.Visibility = Visibility.Visible;
+                this.IsEnabled = true;
             }
         }
     }
 }
+    

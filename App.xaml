@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SRLS_launcher"
              StartupUri="Lauch_Page.xaml">
     <Application.Resources>
-         
+        <!--Lauch_Page.xaml-->
+        <!--WorkSpace.xaml-->
     </Application.Resources>
 </Application>

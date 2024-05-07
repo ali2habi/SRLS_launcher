@@ -73,4 +73,6 @@ C:\Users\Admin\Desktop\SRLS_launcher\bin\Debug\System.Reactive.xml
 C:\Users\Admin\Desktop\SRLS_launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Admin\Desktop\SRLS_launcher\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Admin\Desktop\SRLS_launcher\obj\Debug\SRLS_launcher.csproj.App.config
+C:\Users\Admin\Desktop\SRLS_launcher\obj\Debug\WorkSpace.g.cs
+C:\Users\Admin\Desktop\SRLS_launcher\obj\Debug\WorkSpace.baml
 C:\Users\Admin\Desktop\SRLS_launcher\obj\Debug\SRLS_launcher.csproj.CopyComplete

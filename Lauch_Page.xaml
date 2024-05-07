@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:SRLS_launcher"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="TURBOVAfelka: Окно авторизации" Height="450" Width="450" Background="#AF2B1E">
-    <Grid Margin="10,12,10,10" Background="#FFF8E7">
-        <Grid x:Name="MainPage">
+        Title="TURBOVAfelka:    Окно авторизации" Height="450" Width="450" Background="#AF2B1E">
+    <Grid Margin="10,10,10,10" Background="#FFF8E7">
+        <Grid x:Name="MainPage" d:IsHidden="True">
             <Label Content="Добро пожаловать!" FontFamily="Comic Sans MS" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" Foreground="Lime">
                 <Label.Effect>
                     <DropShadowEffect/>
@@ -31,62 +31,91 @@
             </Button>
         </Grid>
         <Grid x:Name="Login_window" Margin="50,50,50,50" Background="#AF2B1E" d:IsHidden="True">
-                <Grid Margin="5,5,5,5" Background="#FFF8E7">
-                    <Label Content="Введите логин и пароль" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="Lime">
-                        <Label.Effect>
-                            <DropShadowEffect/>
-                        </Label.Effect>
-                    </Label>
-                    <TextBox x:Name="login_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Margin="0,0,0,40" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                        <TextBox.Effect>
-                            <DropShadowEffect/>
-                        </TextBox.Effect>
-                    </TextBox>
-                    <PasswordBox x:Name="password_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,80,0,0">
-                        <PasswordBox.Effect>
-                            <DropShadowEffect/>
-                        </PasswordBox.Effect>
-                    </PasswordBox>
-                    <Button Content="Вход" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="150" Background="#FFA7ABFF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" Click="Login2_Button_Click">
-                        <Button.Effect>
-                            <DropShadowEffect/>
-                        </Button.Effect>
-                    </Button>
-                    <Button Content="X" FontFamily="Comic Sans MS" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="20" Background="#AF2B1E" BorderBrush="#FFAF2B1E" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Click="Login_Page_Close">
-                        <Button.Effect>
-                            <DropShadowEffect/>
-                        </Button.Effect>
-                    </Button>
-                </Grid>
-            </Grid>
-            <Grid x:Name="Create_window" Margin="50,50,50,50" Background="#AF2B1E">
-                <Grid Margin="5,5,5,5" Background="#FFF8E7">
-                    <Label Content="Введите логин и пароль" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="Lime">
-                        <Label.Effect>
-                            <DropShadowEffect/>
-                        </Label.Effect>
-                    </Label>
-                    <TextBox x:Name="login_create_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Margin="0,0,0,40" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                        <TextBox.Effect>
-                            <DropShadowEffect/>
-                        </TextBox.Effect>
-                    </TextBox>
-                    <PasswordBox x:Name="password_create_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,80,0,0">
-                        <PasswordBox.Effect>
-                            <DropShadowEffect/>
-                        </PasswordBox.Effect>
-                    </PasswordBox>
-                    <Button Content="Регистрация" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="170" Background="#FFA7ABFF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" Click="Create2_Button_Click">
-                        <Button.Effect>
-                            <DropShadowEffect/>
-                        </Button.Effect>
-                    </Button>
-                    <Button Content="X" FontFamily="Comic Sans MS" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="20" Background="#AF2B1E" BorderBrush="#FFAF2B1E" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Click="Create_Page_Close">
-                        <Button.Effect>
-                            <DropShadowEffect/>
-                        </Button.Effect>
-                    </Button>
-                </Grid>
+            <Grid Margin="5,5,5,5" Background="#FFF8E7">
+                <Label Content="Введите логин и пароль" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="Lime">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <TextBox x:Name="login_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Margin="0,0,0,40" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <PasswordBox x:Name="password_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,80,0,0">
+                    <PasswordBox.Effect>
+                        <DropShadowEffect/>
+                    </PasswordBox.Effect>
+                </PasswordBox>
+                <Button Content="Вход" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="150" Background="#FFA7ABFF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" Click="Login2_Button_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button Content="X" FontFamily="Comic Sans MS" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="20" Background="#AF2B1E" BorderBrush="#FFAF2B1E" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Click="Login_Page_Close">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
             </Grid>
         </Grid>
+        <Grid x:Name="Create_window" Margin="50,50,50,50" Background="#AF2B1E">
+            <Grid Margin="5,5,5,5" Background="#FFF8E7">
+                <Label Content="Введите логин и пароль" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="Lime">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <TextBox x:Name="login_create_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Margin="0,0,0,40" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <PasswordBox x:Name="password_create_box" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="200" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,80,0,0">
+                    <PasswordBox.Effect>
+                        <DropShadowEffect/>
+                    </PasswordBox.Effect>
+                </PasswordBox>
+                <Button Content="Регистрация" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="170" Background="#FFA7ABFF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" Click="Create2_Button_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button Content="X" FontFamily="Comic Sans MS" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="20" Background="#AF2B1E" BorderBrush="#FFAF2B1E" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Black" Click="Create_Page_Close">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid x:Name="Create_DataInsert_window" Background="#AF2B1E" d:IsHidden="True">
+            <Grid Margin="5,5,5,5" Background="#FFF8E7">
+                <Label Content="Введите необходимые данные" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="Lime" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+
+                <Label Content="Имя:" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0"/>
+                <TextBox x:Name="username" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="200" Margin="188,100,0,0" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+
+                <TextBlock Text="Дата рождения:" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0" TextWrapping="WrapWithOverflow" Width="168"/>
+                <TextBox x:Name="userdateofbirth" MaxLength="8" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="200" Margin="188,162,0,0" Background="#FFE6E7FF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                
+                <Button Content="Подтвердить" FontFamily="Comic Sans MS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="170" Background="#FFA7ABFF" BorderBrush="#FFBBBBBB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,200,0,0" Click="TryToCreate_Button_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>

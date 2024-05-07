@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\workspace.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:workspace.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\workspace.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:workspace.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|C:\\Users\\Admin\\Desktop\\SRLS_launcher\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|C:\\Users\\Admin\\Desktop\\SRLS_launcher\\lauch_page.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:lauch_page.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\lauch_page.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:lauch_page.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\lauch_page.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:lauch_page.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|c:\\users\\admin\\desktop\\srls_launcher\\initconfigssys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB71FD5-CDD6-448F-84E2-F347230B8A14}|SRLS_launcher.csproj|solutionrelative:initconfigssys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,36 +34,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "InitConfigsSys.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\InitConfigsSys.cs",
+              "RelativeDocumentMoniker": "InitConfigsSys.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\InitConfigsSys.cs",
+              "RelativeToolTip": "InitConfigsSys.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T10:19:53.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Lauch_Page.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\Lauch_Page.xaml.cs",
               "RelativeDocumentMoniker": "Lauch_Page.xaml.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\Lauch_Page.xaml.cs",
               "RelativeToolTip": "Lauch_Page.xaml.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAAA8AAAAcAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAuwFQAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-03T11:47:23.634Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\App.xaml",
-              "RelativeToolTip": "App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-03T11:05:16.884Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Lauch_Page.xaml",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\Lauch_Page.xaml",
               "RelativeDocumentMoniker": "Lauch_Page.xaml",
@@ -71,27 +76,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-03T10:54:35.273Z",
+              "DocumentIndex": 1,
+              "Title": "WorkSpace.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\WorkSpace.xaml.cs",
+              "RelativeDocumentMoniker": "WorkSpace.xaml.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\WorkSpace.xaml.cs",
+              "RelativeToolTip": "WorkSpace.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T10:24:02.95Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T10:54:34.661Z",
+              "DocumentIndex": 0,
+              "Title": "WorkSpace.xaml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\WorkSpace.xaml",
+              "RelativeDocumentMoniker": "WorkSpace.xaml",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\WorkSpace.xaml",
+              "RelativeToolTip": "WorkSpace.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-07T10:24:01.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\SRLS_launcher\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-03T11:05:16.884Z",
               "EditorCaption": ""
             }
           ]
