@@ -53,8 +53,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <Image x:Name="_useravatar" Source="/321.jpg" Stretch="Fill" Margin="0,0,0,10"/>
-                        <Label x:Name="_userlogin" Content="@userlogin" FontFamily="Comic Sans MS" FontSize="30" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Image x:Name="_useravatar" Stretch="Fill" Margin="5,5,0,10" MouseLeftButtonDown="OnAvatarUpload"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock x:Name="_userlogin" Text="@userlogin" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="30"/>
+                            <Border x:Name="_userOnline" BorderThickness="1" CornerRadius="300" Width="20" Height="20" Background="Red" Margin="10,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
             
                     <StackPanel Grid.Column="1" Margin="5,0,0,0">
@@ -65,9 +68,9 @@
                     </StackPanel>
                     
                     <StackPanel Grid.Column="2">
-                        <Label Content="@username" FontFamily="Comic Sans MS" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Label Content="@userdatebirth" FontFamily="Comic Sans MS" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Label Content="@userdateregist" FontFamily="Comic Sans MS" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label x:Name="_user_name" Content="@username" FontFamily="Comic Sans MS" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label x:Name="_user_date_of_birth" Content="@userdatebirth" FontFamily="Comic Sans MS" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label x:Name="_user_date_of_registration" Content="@userdateregist" FontFamily="Comic Sans MS" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         <!--etc..-->
                     </StackPanel>
                 </Grid>
