@@ -38,14 +38,13 @@ namespace SRLS_launcher
             var _username = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Name");
             var _user_dateofbirth = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Date_Of_Birth");
             var _user_email = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Login");
-            //var _user_date_regist = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Name");
+            var _user_date_regist = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Date_Of_Registration");
             var _avatar = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Avatar");
 
             _userlogin.Text = _user_email.ResultAs<string>();
             _user_name.Content = _username.ResultAs<string>();
             _user_date_of_birth.Content = _user_dateofbirth.ResultAs<string>();
-            _user_date_of_birth.Content = _user_dateofbirth.ResultAs<string>();
-            //_user_date_of_registration.Content = _user_date_regist.ResultAs<string>();
+            _user_date_of_registration.Content = _user_date_regist.ResultAs<string>();
             InitTimer();
 
             try
@@ -189,6 +188,7 @@ namespace SRLS_launcher
         }
         public async void UploadAvatarFile(string path)
         {
+            this.IsEnabled = false;
             try
             {
                 var stream = System.IO.File.Open(path, FileMode.Open);
@@ -211,8 +211,8 @@ namespace SRLS_launcher
             }
             catch
             {
-
             }
+            this.IsEnabled = true;
         }
         private void OnProfileClicked(object sender, RoutedEventArgs e)
         {

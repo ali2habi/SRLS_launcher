@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace SRLS_launcher
 {
@@ -83,12 +84,14 @@ namespace SRLS_launcher
                 bool isRegisterIn = await LauncherSys.Create(login_create_box.Text, password_create_box.Password);
                 if (isRegisterIn)
                 {
+                    DateTime time_now = DateTime.Now;
                     var userInfo = new
                     {
                         Login = login_create_box.Text,
                         Name = username.Text,
                         Password = password_create_box.Password,
-                        Date_Of_Birth = userdateofbirth.Text
+                        Date_Of_Birth = userdateofbirth.Text,
+                        Date_Of_Registration = time_now.ToString()
                     };
                     await LauncherSys.GetFirebaseClient().SetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}", userInfo);
                     Enter_to_System();
