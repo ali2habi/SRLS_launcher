@@ -17,6 +17,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Runtime.InteropServices.ComTypes;
+using System.Xml.Linq;
+using System.Windows.Forms;
+using Orientation = System.Windows.Controls.Orientation;
+using Label = System.Windows.Controls.Label;
+using Border = System.Windows.Controls.Border;
 
 namespace SRLS_launcher
 {
@@ -56,26 +62,6 @@ namespace SRLS_launcher
             {
                 await DownloadAvatar("anonimus.png", _useravatar);
             }          
-        }
-        public async Task DownloadAvatar(string key, Image avatar)
-        {
-            if (String.IsNullOrEmpty(key))
-            {
-                key = "anonimus.png";
-            }
-            FirebaseStorageReference imageRef = LauncherSys.GetStorage().Child(key);
-
-            var downloadUrl = await imageRef.GetDownloadUrlAsync();
-            using (var httpClient = new HttpClient())
-            {
-                var stream = await httpClient.GetStreamAsync(downloadUrl);
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = stream;
-                bitmapImage.EndInit();
-                avatar.Source = bitmapImage;
-            }
         }
         public async void timer_Tick(object sender, EventArgs e)
         {
@@ -160,7 +146,7 @@ namespace SRLS_launcher
             Border border = new Border();
             border.BorderThickness = new Thickness(1);
             border.CornerRadius = new CornerRadius(300);
-            border.HorizontalAlignment = HorizontalAlignment.Left;
+            border.HorizontalAlignment = HorizontalAlignment;
             border.VerticalAlignment = VerticalAlignment.Center;
             border.Width = 22;
             border.Height = 22;
@@ -174,6 +160,26 @@ namespace SRLS_launcher
             friends_list.Children.Add(mainGrid);
 
             this.IsEnabled = true;
+        }
+        public async Task DownloadAvatar(string key, Image avatar)
+        {
+            if (String.IsNullOrEmpty(key))
+            {
+                key = "anonimus.png";
+            }
+            FirebaseStorageReference imageRef = LauncherSys.GetStorage().Child(key);
+
+            var downloadUrl = await imageRef.GetDownloadUrlAsync();
+            using (var httpClient = new HttpClient())
+            {
+                var stream = await httpClient.GetStreamAsync(downloadUrl);
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                avatar.Source = bitmapImage;
+            }
         }
         private void OnAvatarUpload(object sender, MouseButtonEventArgs e)
         {
@@ -192,7 +198,8 @@ namespace SRLS_launcher
             try
             {
                 var stream = System.IO.File.Open(path, FileMode.Open);
-                var name = $"{new Random().Next(0, 100000)}{System.IO.Path.GetExtension(path)}";
+                string name = $"{new Random().Next(0, 100000)}{System.IO.Path.GetExtension(path)}";
+                var userIDFolder = GetUserIDFolder();
                 var task = new FirebaseStorage(
                     "srls-launcher.appspot.com",
 
@@ -201,18 +208,45 @@ namespace SRLS_launcher
                          AuthTokenAsyncFactory = () => Task.FromResult(LauncherSys.GetUserCredential().User.Credential.IdToken),
                          ThrowOnCancel = true,
                      })
-                    .Child("user_avatars")
+                    .Child(userIDFolder)
                     .Child(name)
                     .PutAsync(stream);
 
                 var downloadUrl = await task;
-                FirebaseResponse avatar = await LauncherSys.GetFirebaseClient().SetAsync("Information/" + LauncherSys.GetUserCredential().User.Uid + "/Avatar", $"user_avatars/{name}");
-                await DownloadAvatar($"user_avatars/{name}", _useravatar);
+                //DeletePreviousAvatar();
+                FirebaseResponse avatar = await LauncherSys.GetFirebaseClient().SetAsync("Information/" + LauncherSys.GetUserCredential().User.Uid + "/Avatar", $"{userIDFolder}/{name}");
+                await DownloadAvatar($"{userIDFolder}/{name}", _useravatar);
             }
             catch
             {
             }
             this.IsEnabled = true;
+        }
+        //public async void DeletePreviousAvatar()
+        //{
+        //    try
+        //    {
+        //        var userIDFolder = GetUserIDFolder();
+        //        var task = new FirebaseStorage(
+        //            "srls-launcher.appspot.com",
+        //            new FirebaseStorageOptions
+        //            {
+        //                AuthTokenAsyncFactory = () => Task.FromResult(LauncherSys.GetUserCredential().User.Credential.IdToken),
+        //                ThrowOnCancel = true,
+        //            })
+        //            .Child(userIDFolder)
+        //            .DeleteAsync();
+
+        //        FirebaseStorageReference imageRef = LauncherSys.GetStorage().Child(userIDFolder);
+        //        await imageRef.DeleteAsync();
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
+        public string GetUserIDFolder()
+        {
+            return $"user_avatars/{LauncherSys.GetUserCredential().User.Uid}";
         }
         private void OnProfileClicked(object sender, RoutedEventArgs e)
         {
