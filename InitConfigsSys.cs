@@ -4,17 +4,9 @@ using Firebase.Auth;
 using Firebase.Storage;
 using FireSharp.Interfaces;
 using FireSharp;
-using FireSharp.Config;
-using FireSharp.Response;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics.Eventing.Reader;
-using System.Security.RightsManagement;
-using System.Xml.Linq;
 
 namespace SRLS_launcher
 {

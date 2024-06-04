@@ -37,14 +37,14 @@
                 </Button.Effect>
                 <Image Source="/friends.png"/>
             </Button>
-            <Button FontFamily="Comic Sans MS" FontSize="22" Background="#FFF1EFB7" BorderBrush="Black" Grid.Column="3" Margin="20,20,20,20" MaxWidth="230">
+            <Button FontFamily="Comic Sans MS" FontSize="22" Background="#FFF1EFB7" BorderBrush="Black" Grid.Column="3" Margin="20,20,20,20" MaxWidth="230" Click="OnMessagesClicked">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <Image Source="/messages.png"/>
             </Button>
         </Grid>
-        <ScrollViewer x:Name="Profile">
+        <ScrollViewer x:Name="Profile" d:IsHidden="True">
             <Grid Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -81,11 +81,19 @@
                 <DataGrid Margin="100,20,100,0"/>
             </Grid>
         </ScrollViewer>
-        <ScrollViewer x:Name="Friends" d:IsHidden="True">
+        <ScrollViewer x:Name="Friends">
             <Grid Grid.Row="0">
-                <StackPanel x:Name="friends_list">
-                    <!--data will be here-->
-                </StackPanel>
+                <StackPanel x:Name="friends_list"/>
+            </Grid>
+        </ScrollViewer>
+        <ScrollViewer x:Name="Messanger" d:IsHidden="True">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="list_friends" Grid.Column="0"/>
+                <StackPanel x:Name="messages_list" Grid.Column="1"/>
             </Grid>
         </ScrollViewer>
     </Grid>

@@ -23,6 +23,7 @@ using System.Windows.Forms;
 using Orientation = System.Windows.Controls.Orientation;
 using Label = System.Windows.Controls.Label;
 using Border = System.Windows.Controls.Border;
+using System.Security.RightsManagement;
 
 namespace SRLS_launcher
 {
@@ -39,6 +40,7 @@ namespace SRLS_launcher
         {
             Profile.Visibility = Visibility.Hidden;
             Friends.Visibility = Visibility.Hidden;
+            Messanger.Visibility = Visibility.Hidden;
             //etc..
 
             var _username = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Name");
@@ -123,15 +125,14 @@ namespace SRLS_launcher
                 return;
 
             Grid mainGrid = new Grid();
-            mainGrid.Background = new SolidColorBrush(Color.FromRgb(215, 241, 247));
+            mainGrid.Background = new SolidColorBrush(Color.FromRgb(173, 216, 230));
             mainGrid.Margin = new Thickness(0, 0, 0, 6);
-
             StackPanel stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
 
             Image image = new Image();
-            image.Width = 100;
-            image.Height = 100;
+            image.MaxWidth = 200;
+            image.MaxHeight = 200;
             image.Margin = new Thickness(6);
             image.Stretch = Stretch.Fill;
             DownloadAvatar(avatarUrl, image);
@@ -155,6 +156,21 @@ namespace SRLS_launcher
             stackPanel.Children.Add(image);
             stackPanel.Children.Add(label);
             stackPanel.Children.Add(border);
+
+            mainGrid.MouseLeftButtonUp += async (sender, e) =>
+            {
+                System.Windows.MessageBox.Show("hell");
+            };
+
+            mainGrid.MouseEnter += (sender, e) =>
+            {
+                mainGrid.Background = new SolidColorBrush(Color.FromRgb(176, 224, 230));
+            };
+
+            mainGrid.MouseLeave += (sender, e) =>
+            {
+                mainGrid.Background = new SolidColorBrush(Color.FromRgb(173, 216, 230));
+            };
 
             mainGrid.Children.Add(stackPanel);
             friends_list.Children.Add(mainGrid);
@@ -253,6 +269,7 @@ namespace SRLS_launcher
             Profile.Visibility = Visibility.Visible;
             Home.Visibility = Visibility.Hidden;
             Friends.Visibility = Visibility.Hidden;
+            Messanger.Visibility = Visibility.Hidden;
             //etc..
         }
         private void OnHomeClicked(object sender, RoutedEventArgs e)
@@ -260,6 +277,7 @@ namespace SRLS_launcher
             Profile.Visibility = Visibility.Hidden;
             Home.Visibility = Visibility.Visible;
             Friends.Visibility = Visibility.Hidden;
+            Messanger.Visibility = Visibility.Hidden;
             //etc..
         }
         private void OnFriendsClicked(object sender, RoutedEventArgs e)
@@ -268,8 +286,17 @@ namespace SRLS_launcher
             Profile.Visibility = Visibility.Hidden;
             Home.Visibility = Visibility.Hidden;
             Friends.Visibility = Visibility.Visible;
+            Messanger.Visibility = Visibility.Hidden;
             //etc..
             GetAllUsers();
+        }
+        private void OnMessagesClicked(object sender, RoutedEventArgs e)
+        {
+            Profile.Visibility = Visibility.Hidden;
+            Home.Visibility = Visibility.Hidden;
+            Friends.Visibility = Visibility.Hidden;
+            Messanger.Visibility = Visibility.Visible;
+
         }
     }
 }
