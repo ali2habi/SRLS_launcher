@@ -24,6 +24,10 @@ using Orientation = System.Windows.Controls.Orientation;
 using Label = System.Windows.Controls.Label;
 using Border = System.Windows.Controls.Border;
 using System.Security.RightsManagement;
+using System.Security.Cryptography;
+using System.Net.Mail;
+using System.Windows.Media.Animation;
+using System.Windows.Controls.Primitives;
 
 namespace SRLS_launcher
 {
@@ -31,6 +35,8 @@ namespace SRLS_launcher
     {
         InitConfigsSys LauncherSys = new InitConfigsSys();
         DispatcherTimer timer;
+        private DispatcherTimer UpdateTimer;
+        private string Receiver;
         public WorkSpace()
         {
             InitializeComponent();
@@ -39,8 +45,10 @@ namespace SRLS_launcher
         public async void Start_WorkSpace()
         {
             Profile.Visibility = Visibility.Hidden;
-            Friends.Visibility = Visibility.Hidden;
+            People.Visibility = Visibility.Hidden;
             Messanger.Visibility = Visibility.Hidden;
+            Type_and_SendMessage.Visibility = Visibility.Hidden;
+            List_of_messages.Visibility = Visibility.Hidden;
             //etc..
 
             var _username = await LauncherSys.GetFirebaseClient().GetAsync($"Information/{LauncherSys.GetUserCredential().User.Uid}/Name");
@@ -131,8 +139,8 @@ namespace SRLS_launcher
             stackPanel.Orientation = Orientation.Horizontal;
 
             Image image = new Image();
-            image.MaxWidth = 200;
-            image.MaxHeight = 200;
+            image.MaxWidth = 50;
+            image.MaxHeight = 50;
             image.Margin = new Thickness(6);
             image.Stretch = Stretch.Fill;
             DownloadAvatar(avatarUrl, image);
@@ -140,17 +148,17 @@ namespace SRLS_launcher
             Label label = new Label();
             label.VerticalContentAlignment = VerticalAlignment.Center;
             label.FontFamily = new FontFamily("Comic Sans MS");
-            label.FontSize = 30;
+            label.FontSize = 22;
             label.Margin = new Thickness(10, 0, 0, 0);
             label.Content = username;
-
+            
             Border border = new Border();
             border.BorderThickness = new Thickness(1);
             border.CornerRadius = new CornerRadius(300);
             border.HorizontalAlignment = HorizontalAlignment;
             border.VerticalAlignment = VerticalAlignment.Center;
-            border.Width = 22;
-            border.Height = 22;
+            border.Width = 10;
+            border.Height = 10;
             border.Background = Brushes.Red;
             isOnline(uid, border);
             stackPanel.Children.Add(image);
@@ -159,7 +167,11 @@ namespace SRLS_launcher
 
             mainGrid.MouseLeftButtonUp += async (sender, e) =>
             {
-                System.Windows.MessageBox.Show("hell");
+                DisplayMessages(null, null);
+                Empty_Receiver.Visibility = Visibility.Hidden;
+                List_of_messages.Visibility = Visibility.Visible;
+                Type_and_SendMessage.Visibility = Visibility.Visible;
+                Receiver = uid;
             };
 
             mainGrid.MouseEnter += (sender, e) =>
@@ -264,39 +276,144 @@ namespace SRLS_launcher
         {
             return $"user_avatars/{LauncherSys.GetUserCredential().User.Uid}";
         }
+        public void HideAllMessVal()
+        {
+            Type_and_SendMessage.Visibility = Visibility.Hidden;
+            List_of_messages.Visibility = Visibility.Hidden;
+            Empty_Receiver.Visibility = Visibility.Visible;
+            Empty_Receiver.Text = "Выберите пользователя, которому хотите отправить сообщение.";
+        }
         private void OnProfileClicked(object sender, RoutedEventArgs e)
         {
             Profile.Visibility = Visibility.Visible;
             Home.Visibility = Visibility.Hidden;
-            Friends.Visibility = Visibility.Hidden;
+            People.Visibility = Visibility.Hidden;
             Messanger.Visibility = Visibility.Hidden;
-            //etc..
+            HideAllMessVal();
         }
         private void OnHomeClicked(object sender, RoutedEventArgs e)
         {
             Profile.Visibility = Visibility.Hidden;
             Home.Visibility = Visibility.Visible;
-            Friends.Visibility = Visibility.Hidden;
+            People.Visibility = Visibility.Hidden;
             Messanger.Visibility = Visibility.Hidden;
-            //etc..
+            HideAllMessVal();
         }
         private void OnFriendsClicked(object sender, RoutedEventArgs e)
         {
-            this.IsEnabled = false;
             Profile.Visibility = Visibility.Hidden;
             Home.Visibility = Visibility.Hidden;
-            Friends.Visibility = Visibility.Visible;
+            People.Visibility = Visibility.Visible;
             Messanger.Visibility = Visibility.Hidden;
-            //etc..
-            GetAllUsers();
+            HideAllMessVal();
         }
         private void OnMessagesClicked(object sender, RoutedEventArgs e)
         {
             Profile.Visibility = Visibility.Hidden;
             Home.Visibility = Visibility.Hidden;
-            Friends.Visibility = Visibility.Hidden;
+            People.Visibility = Visibility.Hidden;
             Messanger.Visibility = Visibility.Visible;
+            //etc..
+            GetAllUsers();
+        }
+        public string GetMessagePath()
+        {
+            return "Messages/";
+        }
+        private async void Send_Message(object sender, RoutedEventArgs e)
+        {
+            if (TextMessage.Text != string.Empty && Receiver != string.Empty)
+            {   
+                SendMessage(TextMessage.Text, LauncherSys.GetUserCredential().User.Uid, Receiver);
+                TextMessage.Text = string.Empty;
+                DisplayMessages(null, null);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Текст сообщения пустой!");
+            }
+        }
+        private async void SendMessage(string text, string sender, string receiver)
+        {          
+            string name = $"{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}" + $"{new Random().Next(0, 100000)}";
+            var message = new
+            {
+                Text = text,
+                Sender = sender,
+                Receiver = receiver,
+                Timestamp = DateTime.Now
+            };
+            await LauncherSys.GetFirebaseClient().SetAsync($"{GetMessagePath()}/{name}", message);
+        }
+        private void UpdatingEvents()
+        {
+            UpdateTimer = new DispatcherTimer();
+            UpdateTimer.Tick += new EventHandler(DisplayMessages);
+            UpdateTimer.Interval = new TimeSpan(0, 0, 5);
+            UpdateTimer.Start();
+        }
+        private async void DisplayMessages(object sender, EventArgs e)
+        {
+            try
+            {
+                messagesList.Items.Clear();
+                var user_messages = await LauncherSys.GetFirebaseClient().GetAsync($"{GetMessagePath()}");
+                string json = user_messages.Body;
 
+                JObject jsonObject = JObject.Parse(json);
+
+                foreach (var user in jsonObject)
+                {
+                    string userId = user.Key;
+                    JObject userData = (JObject)user.Value;
+                    string sender_ = (string)userData["Sender"];
+                    string receiver = (string)userData["Receiver"];
+                    string message = (string)userData["Text"];
+
+                    if (receiver == Receiver || sender_ == Receiver)
+                    {
+                        var textBlock = new TextBlock
+                        {
+                            Text = $"{message}",
+                            TextWrapping = TextWrapping.Wrap,
+                            Background = sender_ == LauncherSys.GetUserCredential().User.Uid ? Brushes.LightGreen : Brushes.LightBlue,
+                            Padding = new Thickness(5)
+                        };
+
+                        var messageItem = new ListBoxItem();
+                        messageItem.Content = textBlock;
+                        messageItem.HorizontalAlignment = sender_ == LauncherSys.GetUserCredential().User.Uid ? System.Windows.HorizontalAlignment.Right : System.Windows.HorizontalAlignment.Left;
+                        messageItem.MaxWidth = 300;
+                        messageItem.MinWidth = 0;
+                        #region Анимация
+                        messageItem.Opacity = 0;
+                        DoubleAnimation fadeInAnimation = new DoubleAnimation
+                        {
+                            From = 0,
+                            To = 1,
+                            Duration = TimeSpan.FromSeconds(0.2)
+                        };
+                        Storyboard.SetTarget(fadeInAnimation, messageItem);
+                        Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath(System.Windows.Controls.Button.OpacityProperty));
+                        Storyboard storyboard = new Storyboard();
+                        storyboard.Children.Add(fadeInAnimation);
+                        storyboard.Begin();
+                        #endregion
+                        messagesList.Items.Add(messageItem);
+                    }
+                    else
+                    {
+                        List_of_messages.Visibility = Visibility.Hidden;
+                        Empty_Receiver.Text = "У вас нет сообщений с этим пользователем.";
+                        Empty_Receiver.Visibility = Visibility.Visible;
+                        //System.Windows.MessageBox.Show("ошибочка какая-то.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Нет сообщений.\n" + ex);
+            }
         }
     }
 }

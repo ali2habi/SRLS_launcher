@@ -81,20 +81,55 @@
                 <DataGrid Margin="100,20,100,0"/>
             </Grid>
         </ScrollViewer>
-        <ScrollViewer x:Name="Friends">
+        <ScrollViewer x:Name="People" d:IsHidden="True">
             <Grid Grid.Row="0">
-                <StackPanel x:Name="friends_list"/>
+                <StackPanel x:Name="people_list"/>
             </Grid>
         </ScrollViewer>
-        <ScrollViewer x:Name="Messanger" d:IsHidden="True">
+        <Grid x:Name="Messanger">
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel x:Name="list_friends" Grid.Column="0"/>
-                <StackPanel x:Name="messages_list" Grid.Column="1"/>
+                <ScrollViewer Grid.Column="0">
+                    <StackPanel x:Name="friends_list"/>
+                </ScrollViewer>
+                <Grid x:Name="Chatting_area" Grid.Column="1">
+                    <Grid>
+                        <TextBlock x:Name="Empty_Receiver" Text="Выберите пользователя, которому хотите отправить сообщение." FontFamily="Comic Sans MS" FontSize="30" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="7*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <ScrollViewer x:Name="List_of_messages">
+                                <ListBox Name="messagesList" FontSize="25" FontFamily="Comic Sans MS">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="{Binding Path=Alignment}">
+                                                <Border CornerRadius="5" Background="{Binding Path=Background}">
+                                                    <TextBlock Text="{Binding Path=Text}" Margin="5" Foreground="White"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </ScrollViewer>
+                            <Grid x:Name="Type_and_SendMessage" Grid.Row="1" MinHeight="46.755">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="TextMessage" MaxLength="255" TextWrapping="Wrap" Margin="5,5,5,5" FontSize="25" FontFamily="Comic Sans MS" BorderBrush="Black" Padding="5"/>
+                                    <Button Content="Отправить" FontSize="20" FontFamily="Comic Sans MS" Grid.Column="1" Margin="5,5,5,5" Click="Send_Message" Background="#FFB7FFC2" BorderBrush="Black"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
-        </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>
