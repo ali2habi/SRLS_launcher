@@ -97,13 +97,13 @@
                 </ScrollViewer>
                 <Grid x:Name="Chatting_area" Grid.Column="1">
                     <Grid>
-                        <TextBlock x:Name="Empty_Receiver" Text="Выберите пользователя, которому хотите отправить сообщение." FontFamily="Comic Sans MS" FontSize="30" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
+                        <TextBlock x:Name="Empty_Receiver" Text="Выберите пользователя, которому хотите отправить сообщение." FontFamily="Comic Sans MS" FontSize="30" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="7*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <ScrollViewer x:Name="List_of_messages">
+                            <ScrollViewer x:Name="List_of_messages" d:IsHidden="True">
                                 <ListBox Name="messagesList" FontSize="25" FontFamily="Comic Sans MS">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>

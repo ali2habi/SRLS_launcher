@@ -167,11 +167,11 @@ namespace SRLS_launcher
 
             mainGrid.MouseLeftButtonUp += async (sender, e) =>
             {
-                DisplayMessages(null, null);
                 Empty_Receiver.Visibility = Visibility.Hidden;
                 List_of_messages.Visibility = Visibility.Visible;
                 Type_and_SendMessage.Visibility = Visibility.Visible;
                 Receiver = uid;
+                DisplayMessages();
             };
 
             mainGrid.MouseEnter += (sender, e) =>
@@ -276,20 +276,12 @@ namespace SRLS_launcher
         {
             return $"user_avatars/{LauncherSys.GetUserCredential().User.Uid}";
         }
-        public void HideAllMessVal()
-        {
-            Type_and_SendMessage.Visibility = Visibility.Hidden;
-            List_of_messages.Visibility = Visibility.Hidden;
-            Empty_Receiver.Visibility = Visibility.Visible;
-            Empty_Receiver.Text = "Выберите пользователя, которому хотите отправить сообщение.";
-        }
         private void OnProfileClicked(object sender, RoutedEventArgs e)
         {
             Profile.Visibility = Visibility.Visible;
             Home.Visibility = Visibility.Hidden;
             People.Visibility = Visibility.Hidden;
             Messanger.Visibility = Visibility.Hidden;
-            HideAllMessVal();
         }
         private void OnHomeClicked(object sender, RoutedEventArgs e)
         {
@@ -297,7 +289,6 @@ namespace SRLS_launcher
             Home.Visibility = Visibility.Visible;
             People.Visibility = Visibility.Hidden;
             Messanger.Visibility = Visibility.Hidden;
-            HideAllMessVal();
         }
         private void OnFriendsClicked(object sender, RoutedEventArgs e)
         {
@@ -305,7 +296,6 @@ namespace SRLS_launcher
             Home.Visibility = Visibility.Hidden;
             People.Visibility = Visibility.Visible;
             Messanger.Visibility = Visibility.Hidden;
-            HideAllMessVal();
         }
         private void OnMessagesClicked(object sender, RoutedEventArgs e)
         {
@@ -326,7 +316,7 @@ namespace SRLS_launcher
             {   
                 SendMessage(TextMessage.Text, LauncherSys.GetUserCredential().User.Uid, Receiver);
                 TextMessage.Text = string.Empty;
-                DisplayMessages(null, null);
+                DisplayMessages();
             }
             else
             {
@@ -348,11 +338,11 @@ namespace SRLS_launcher
         private void UpdatingEvents()
         {
             UpdateTimer = new DispatcherTimer();
-            UpdateTimer.Tick += new EventHandler(DisplayMessages);
+            //UpdateTimer.Tick += new EventHandler(DisplayMessages);
             UpdateTimer.Interval = new TimeSpan(0, 0, 5);
             UpdateTimer.Start();
         }
-        private async void DisplayMessages(object sender, EventArgs e)
+        private async void DisplayMessages()
         {
             try
             {
@@ -370,7 +360,7 @@ namespace SRLS_launcher
                     string receiver = (string)userData["Receiver"];
                     string message = (string)userData["Text"];
 
-                    if (receiver == Receiver || sender_ == Receiver)
+                    if ( (receiver == Receiver && sender_ == LauncherSys.GetUserCredential().User.Uid) || (receiver == LauncherSys.GetUserCredential().User.Uid && sender_ == Receiver) )
                     {
                         var textBlock = new TextBlock
                         {
@@ -401,13 +391,13 @@ namespace SRLS_launcher
                         #endregion
                         messagesList.Items.Add(messageItem);
                     }
-                    else
-                    {
-                        List_of_messages.Visibility = Visibility.Hidden;
-                        Empty_Receiver.Text = "У вас нет сообщений с этим пользователем.";
-                        Empty_Receiver.Visibility = Visibility.Visible;
-                        //System.Windows.MessageBox.Show("ошибочка какая-то.");
-                    }
+                    //else
+                    //{
+                    //    List_of_messages.Visibility = Visibility.Hidden;
+                    //    Empty_Receiver.Text = "У вас нет сообщений с этим пользователем.";
+                    //    Empty_Receiver.Visibility = Visibility.Visible;
+                    //    //System.Windows.MessageBox.Show("ошибочка какая-то.");
+                    //}
                 }
             }
             catch (Exception ex)
