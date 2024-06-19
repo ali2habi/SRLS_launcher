@@ -62,6 +62,7 @@ namespace SRLS_launcher
             _user_date_of_birth.Content = _user_dateofbirth.ResultAs<string>();
             _user_date_of_registration.Content = _user_date_regist.ResultAs<string>();
             InitTimer();
+            UpdatingEvents();
 
             try
             {
@@ -171,7 +172,7 @@ namespace SRLS_launcher
                 List_of_messages.Visibility = Visibility.Visible;
                 Type_and_SendMessage.Visibility = Visibility.Visible;
                 Receiver = uid;
-                DisplayMessages();
+                DisplayMessages(e, e);
             };
 
             mainGrid.MouseEnter += (sender, e) =>
@@ -316,7 +317,7 @@ namespace SRLS_launcher
             {   
                 SendMessage(TextMessage.Text, LauncherSys.GetUserCredential().User.Uid, Receiver);
                 TextMessage.Text = string.Empty;
-                DisplayMessages();
+                //DisplayMessages(e, e);
             }
             else
             {
@@ -338,15 +339,15 @@ namespace SRLS_launcher
         private void UpdatingEvents()
         {
             UpdateTimer = new DispatcherTimer();
-            //UpdateTimer.Tick += new EventHandler(DisplayMessages);
+            UpdateTimer.Tick += new EventHandler(DisplayMessages);
             UpdateTimer.Interval = new TimeSpan(0, 0, 5);
             UpdateTimer.Start();
         }
-        private async void DisplayMessages()
+        private async void DisplayMessages(object sender, EventArgs e)
         {
+            messagesList.Items.Clear();
             try
             {
-                messagesList.Items.Clear();
                 var user_messages = await LauncherSys.GetFirebaseClient().GetAsync($"{GetMessagePath()}");
                 string json = user_messages.Body;
 
@@ -376,18 +377,18 @@ namespace SRLS_launcher
                         messageItem.MaxWidth = 300;
                         messageItem.MinWidth = 0;
                         #region Анимация
-                        messageItem.Opacity = 0;
-                        DoubleAnimation fadeInAnimation = new DoubleAnimation
-                        {
-                            From = 0,
-                            To = 1,
-                            Duration = TimeSpan.FromSeconds(0.2)
-                        };
-                        Storyboard.SetTarget(fadeInAnimation, messageItem);
-                        Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath(System.Windows.Controls.Button.OpacityProperty));
-                        Storyboard storyboard = new Storyboard();
-                        storyboard.Children.Add(fadeInAnimation);
-                        storyboard.Begin();
+                        //messageItem.Opacity = 0;
+                        //DoubleAnimation fadeInAnimation = new DoubleAnimation
+                        //{
+                        //    From = 0,
+                        //    To = 1,
+                        //    Duration = TimeSpan.FromSeconds(0.2)
+                        //};
+                        //Storyboard.SetTarget(fadeInAnimation, messageItem);
+                        //Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath(System.Windows.Controls.Button.OpacityProperty));
+                        //Storyboard storyboard = new Storyboard();
+                        //storyboard.Children.Add(fadeInAnimation);
+                        //storyboard.Begin();
                         #endregion
                         messagesList.Items.Add(messageItem);
                     }
@@ -399,6 +400,7 @@ namespace SRLS_launcher
                     //    //System.Windows.MessageBox.Show("ошибочка какая-то.");
                     //}
                 }
+                //messagesList.UpdateLayout();
             }
             catch (Exception ex)
             {
